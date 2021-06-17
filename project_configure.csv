@@ -1,0 +1,6 @@
+compile_tool,g++ -std=c++11 main.cpp -o dist/QproCppTemplate
+compile_filename,main.cpp
+executable_filename,dist/QproCppTemplate
+input_file,dist/input.txt
+template_root,template/
+server_target,,

@@ -19,7 +19,7 @@ def compile(debug: bool = False):
     others = " ".join(other_flags)
 
     defines = []
-    cur_func_fig = app.fig_table[2]
+    cur_func_fig = app.fig_table[1]
 
     for item in cur_func_fig["args"]:
         _name = item["name"]

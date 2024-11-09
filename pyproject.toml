@@ -1,0 +1,13 @@
+[tool.qpro]
+[[tool.qpro.server_targets]]
+user = ""
+host = ""
+path = ""
+port = "22"
+
+[tool.qpro.config]
+build = ""
+entry_point = "main.cpp"
+executable = "python3 -m QproCppTemplateCommander.main"
+input_file = "dist/input.txt"
+template_root = "template/"

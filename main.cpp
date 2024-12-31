@@ -8,6 +8,6 @@ int main(int argc, char **argv)
     echo(success, "Success!");
     echo(debug, "Debug!");
     echo(error, "Error!");
-    echo(split, "Split!");
+    echo(rule, "Split!");
     return 0;
 }

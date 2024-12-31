@@ -12,25 +12,6 @@ import sys
 from QuickProject import QproDefaultStatus, user_pip, _ask, external_exec, get_config
 
 
-cc = "g++"
-optimization = "fast"  # [fast, 0, 1, 2, 3, s, g]
-standard = "c++17"  # [c++98, c++03, c++11, c++14, c++17, c++2a]
-
-includePath = [
-    "include",
-]
-
-sourcePath = [get_config()["entry_point"]]
-
-libPath = []
-
-usingLib = [
-    "m",
-]
-
-other_flags = []
-
-
 def requirePackage(
     pname: str,
     module: str = "",

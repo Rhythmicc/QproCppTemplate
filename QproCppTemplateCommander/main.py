@@ -10,31 +10,32 @@ def compile(debug: bool = False):
     """
     🔨 编译
     """
-    # * 你可以在此函数的参数中添加你需要的define, bool类型参数将自动转换为-D <参数名>，其他类型参数将自动转换为-D <参数名>=<参数值>。因此推荐为bool类型参数设置默认值为False。
+    # * 在此函数的参数中添加你需要的define, bool类型参数将自动转换为-D <参数名>，其他类型参数将自动转换为-D <参数名>=<参数值>。因此推荐为bool类型参数设置默认值为False。
     # ! 不支持list类型参数
-    include = " ".join([f"-I {path}" for path in includePath])
-    source = " ".join([f"{path}" for path in sourcePath])
-    lib_path = " ".join([f"-L {path}" for path in libPath])
-    libs = " ".join([f"-l{lib}" for lib in usingLib])
-    others = " ".join(other_flags)
-
     defines = []
     cur_func_fig = app.fig_table[1]
 
     for item in cur_func_fig["args"]:
         _name = item["name"]
-        defines.append(f"-D {name}='{eval(_name)}'")
+        defines.append(f"-D{name}='{eval(_name)}'")
     for item in cur_func_fig["options"]:
         _name = item["name"].strip("-")
         if "args" not in item and eval(_name):
-            defines.append(f"-D {_name.upper()}")
+            defines.append(f"-D{_name.upper()}")
         elif "args" in item:
-            defines.append(f"-D {_name}='{eval(_name)}'")
+            defines.append(f"-D{_name}='{eval(_name)}'")
     defines = " ".join(defines)
 
-    external_exec(
-        f"{cc} -std={standard} -O{optimization} {include + ' ' if include else ''}{lib_path + ' ' if lib_path else ''}{source + ' ' if source else ''}{defines + ' ' if defines else ''}{libs + ' ' if libs else ''}{others + ' ' if others else ''}-o dist/{name}"
-    )
+    os.chdir("dist")
+    st, ct = external_exec(f'cmake -DDEFINITIONS="{defines}" ..', without_output=True)
+    if st:
+        QproDefaultConsole.print(ct)
+        return
+    st, ct = external_exec("make -j", without_output=True)
+    if st:
+        QproDefaultConsole.print(ct)
+        return
+    os.chdir("..")
 
 
 @app.command()

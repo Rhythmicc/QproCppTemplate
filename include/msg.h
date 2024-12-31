@@ -19,7 +19,9 @@ const char *_msg_template[] = {
     "__RULE__",
     "__MARKDOWN__",
     "__START__",
-    "__STOP__"};
+    "__STOP__",
+    "__EXECUTE__"
+};
 
 typedef enum msg_type
 {
@@ -32,7 +34,8 @@ typedef enum msg_type
     rule,
     markdown,
     start_status,
-    stop_status
+    stop_status,
+    custom
 } msg_type;
 
 void echo(msg_type type, const char *format, ...)
